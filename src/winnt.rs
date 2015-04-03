@@ -26,6 +26,7 @@ pub struct FLOATING_SAVE_AREA {
     pub RegisterArea: [::BYTE; SIZE_OF_80387_REGISTERS],
     pub Spare0: ::DWORD,
 }
+#[cfg(target_arch = "x86")]
 impl Clone for FLOATING_SAVE_AREA { fn clone(&self) -> FLOATING_SAVE_AREA { *self } }
 #[cfg(target_arch = "x86")]
 pub type PFLOATING_SAVE_AREA = *mut FLOATING_SAVE_AREA;
@@ -61,7 +62,7 @@ pub struct CONTEXT {
 }
 impl Clone for CONTEXT { fn clone(&self) -> CONTEXT { *self } }
 // FIXME - Align 16
-#[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Clone, Copy, Debug)]
+#[cfg(target_arch = "x86_64")] #[repr(C)] #[derive(Copy, Debug)]
 pub struct CONTEXT {
     pub P1Home: ::DWORD64,
     pub P2Home: ::DWORD64,
